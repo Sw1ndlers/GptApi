@@ -4,7 +4,7 @@ import PlaywrightHandler from "@handlers/Playwright";
 import ActionsHandler from "@handlers/Actions";
 import CookieHandler from "@handlers/Cookies";
 
-import Constants from "@utils/constants";
+import Constants from "@utils/Constants";
 
 async function startChat(
 	cookieHandler: CookieHandler,
