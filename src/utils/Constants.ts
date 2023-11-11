@@ -5,6 +5,7 @@ const constants = {
 	password: process.env.PASSWORD!,
 	cookiesPath: process.env.COOKIES_PATH!,
 	clickDelay: parseInt(process.env.CLICK_DELAY!),
+    port: parseInt(process.env.PORT!),
 };
 
 // Ensure all constants are defined

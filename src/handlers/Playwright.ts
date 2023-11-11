@@ -5,9 +5,9 @@ export default class PlaywrightHandler {
 	context: BrowserContext | undefined;
 	page: Page | undefined;
 
-	async Launch() {
+	async Launch(headless: boolean = true) {
 		const browser = await chromium.launch({
-			headless: false,
+			headless: headless,
 		});
 		const context = await browser.newContext();
 		const page = await context.newPage();
