@@ -30,5 +30,5 @@ Query
 Reponse
 ```json
 {
-  "success": boolean
+  "success": "true / false"
 }
