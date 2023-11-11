@@ -101,16 +101,12 @@ export default class ActionsHandler {
 		return { inputBox: this.inputBox, sendButton: this.sendButton };
 	}
 
-	// private async getResponseCode(): Promise<number> {
-	//     let responseCode: number;
-
-	//     await this.page.route("*/backend-api/conversation", async route => {
-	//         const response = await route.fetch();
-	//         responseCode = response.status();
-	//     })
-
-	//     return responseCode!;
-	// }
+    async NewChat() {
+        const newChatButton = this.page.getByText("New Chat", {
+            exact: true,
+        });
+        await newChatButton.click();
+    }
 
 	async SendMessage(message: string): Promise<string> {
 		const { inputBox, sendButton } = await this.getMessageElements();

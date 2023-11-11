@@ -46,14 +46,15 @@ async function startChat(
 
 	await startChat(cookieHandler, handler, actions);
 
-    app.get("/chat", async (req, res) => {
-        const message = req.query.message as string;
-        const response = await actions.SendMessage(message);
+	const routes = {
+		chat: (await import("./routes/Chat")).default,
+		newchat: (await import("./routes/Newchat")).default,
+	};
 
-        res.json({ response });
-    });
+	app.get("/chat", (req, res) => routes.chat(actions, req, res));
+	app.get("/newchat", (req, res) => routes.newchat(actions, req, res));
 
-    app.listen(Constants.port, () => {
-        console.log(`Server is listening on port ${Constants.port}`);
-    });
+	app.listen(Constants.port, () => {
+		console.log(`Server is listening on port ${Constants.port}`);
+	});
 })();
