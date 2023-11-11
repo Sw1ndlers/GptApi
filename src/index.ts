@@ -1,10 +1,10 @@
 import "dotenv/config";
 
-import PlaywrightHandler from "@handlers/Playwright";
-import ActionsHandler from "@handlers/Actions";
-import CookieHandler from "@handlers/Cookies";
+import PlaywrightHandler from "./handlers/Playwright";
+import ActionsHandler from "./handlers/Actions";
+import CookieHandler from "./handlers/Cookies";
 
-import Constants from "@utils/Constants";
+import Constants from "./utils/Constants";
 
 async function startChat(
 	cookieHandler: CookieHandler,
@@ -12,18 +12,22 @@ async function startChat(
 	actions: ActionsHandler
 ) {
 	const context = playWrightHandler.context!;
+	const cookiesExist = cookieHandler.CacheExists();
 
-	if (cookieHandler.CacheExists()) {
+	if (cookiesExist) {
 		const cookies = await cookieHandler.GetCookies();
 		await context.addCookies(cookies);
 
 		await playWrightHandler.Goto("https://chat.openai.com/"); // Go to chat page
 	} else {
 		await actions.Login(Constants.email, Constants.password); // Login to OpenAI
-		cookieHandler.CacheCookies(await context.cookies()); // Cache cookies
 	}
 
 	await actions.DismissPopup();
+
+	if (!cookiesExist) {
+		cookieHandler.CacheCookies(await context.cookies()); // Cache cookies
+	}
 }
 
 (async () => {

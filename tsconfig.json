@@ -9,12 +9,7 @@
 		"strict": true,
 		"skipLibCheck": true,
 
-		"paths": {
-			"@handlers/*": ["./src/handlers/*"],
-			"@utils/*": ["./src/utils/*"]
-		},
-
 		"outDir": "./dist",
-		"rootDir": "./src"
-	}
+		"rootDir": "./src",
+	},
 }

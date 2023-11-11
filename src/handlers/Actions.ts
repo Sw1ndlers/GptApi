@@ -1,5 +1,5 @@
 import assert from "assert";
-import PlaywrightHandler from "@handlers/Playwright";
+import PlaywrightHandler from "./Playwright";
 
 import { Locator, Page } from "playwright";
 
