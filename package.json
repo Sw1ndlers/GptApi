@@ -1,4 +1,8 @@
 {
+    "name": "gpt-api",
+    "version": "0.1.0",
+    "author": "Alex L",
+    "license": "MIT",
 	"main": "./src/index.ts",
 	"scripts": {
 		"dev": "tsc && node ./dist/index.js"
