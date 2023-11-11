@@ -1,34 +1,48 @@
 # Gpt Api
 
-A free psuedo wrapper for the chat gpt api
-Created with playwright and express
+A pseudo API for GPT-3 created using typescript.  
+Uses `playwright` to interact with the gpt and `express` to serve the api.  
 
-## GET Routes
 
-### /chat
-**Send a message to chat gpt**
+## Install
+```
+pnpm install
+```
 
-Query
+## Setup
+Rename `.env.example` to `.env` and fill out the appropriate fields
+
+## Run the api
+```
+pnpm run dev
+```
+
+## Send a message to chat gpt
+
+### Request
+`GET /chat`
 ```
 /chat?message="Hello World!"
 ```
-Reponse
+### Reponse
 ```json
 {
   "reponse": "message"
 }
 ```
 
+<br>
 
-### /newchat
-**Creates a new conversation with gpt**
+## Create a new conversation with gpt
 
-Query
+### Request
+`GET /newchat`
 ```
 /newchat
 ```
-Reponse
+### Reponse
 ```json
 {
   "success": "true / false"
 }
+```
