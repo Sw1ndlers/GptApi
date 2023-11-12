@@ -1,14 +1,14 @@
-import ActionsHandler from "../handlers/Actions";
+import PlaywrightHandler from "../handlers/Playwright";
 import { Request, Response } from "express";
 import Logger from "../utils/Logger";
 
 export default async function (
-	actions: ActionsHandler,
+	playwrightHandler: PlaywrightHandler,
 	_req: Request,
 	res: Response
 ) {
-	await actions.NewChat();
+	await playwrightHandler.Close();
 
-	Logger.info("New chat created\n");
+	Logger.info("Browser closed\n");
 	res.json({ success: true });
 }

@@ -1,0 +1,129 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Gpt Api",
+    "dateExported": "2023-11-12T07:07:48.507Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "5d487bc5-c8be-47b7-9234-5c7bfdd0c935",
+            "colId": "83a8368c-3288-4236-8337-fad6a1798f51",
+            "containerId": "",
+            "name": "Message",
+            "url": "localhost:3000/chat?message=\"Hello World!\"",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-11-12T04:19:20.908Z",
+            "modified": "2023-11-12T07:07:05.661Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "message",
+                    "value": "\"Hello World!\"",
+                    "isPath": false
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"response\":"
+                }
+            ]
+        },
+        {
+            "_id": "9d2251ba-c4a2-4297-8f4a-b7437cd0a5e3",
+            "colId": "83a8368c-3288-4236-8337-fad6a1798f51",
+            "containerId": "",
+            "name": "BadMessage",
+            "url": "localhost:3000/chat?nomessage",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2023-11-12T06:54:32.322Z",
+            "modified": "2023-11-12T07:06:18.341Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "nomessage",
+                    "value": "",
+                    "isPath": false
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"error\": \"No message provided\""
+                }
+            ]
+        },
+        {
+            "_id": "78984cbe-cd38-4128-a8f5-e357d3b23ccd",
+            "colId": "83a8368c-3288-4236-8337-fad6a1798f51",
+            "containerId": "",
+            "name": "New Chat",
+            "url": "localhost:3000/newchat",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-11-12T04:19:30.282Z",
+            "modified": "2023-11-12T07:06:53.826Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"success\": true"
+                }
+            ]
+        },
+        {
+            "_id": "0040ca49-4603-41d9-85e3-adbc17cc5ae8",
+            "colId": "83a8368c-3288-4236-8337-fad6a1798f51",
+            "containerId": "",
+            "name": "Close",
+            "url": "localhost:3000/close",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-11-12T07:02:02.093Z",
+            "modified": "2023-11-12T07:05:37.635Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"success\": true"
+                }
+            ]
+        }
+    ]
+}

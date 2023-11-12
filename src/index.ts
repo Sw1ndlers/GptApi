@@ -58,9 +58,11 @@ async function initialize() {
 	const routes = {
 		chat: (await import("./routes/Chat")).default,
 		newchat: (await import("./routes/Newchat")).default,
+        close: (await import("./routes/Close")).default,
 	};
 
 	return {
+        handler,
 		actions,
 		routes,
 	};
@@ -68,10 +70,15 @@ async function initialize() {
 
 // Start Server
 async function main() {
-	const { actions, routes } = await initialize();
+	const { handler, actions, routes } = await initialize();
 
 	app.get("/chat", (req, res) => routes.chat(actions, req, res));
 	app.get("/newchat", (req, res) => routes.newchat(actions, req, res));
+
+    app.get("/close", async (req, res) => {
+        await routes.close(handler, req, res)
+        process.exit(0);
+    });
 
 	app.listen(port, () => {
 		Logger.info(`Listening on port ${port}\n`);
