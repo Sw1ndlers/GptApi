@@ -37,7 +37,8 @@ async function startChat(
 	}
 }
 
-(async () => {
+// Login, Cache Cookies, Create Routes
+async function initialize() {
 	const handler = new PlaywrightHandler();
 	await handler.Launch();
 
@@ -51,10 +52,23 @@ async function startChat(
 		newchat: (await import("./routes/Newchat")).default,
 	};
 
+	return {
+		actions,
+		routes,
+	};
+}
+
+// Start Server
+async function main() {
+	const { actions, routes } = await initialize();
+
 	app.get("/chat", (req, res) => routes.chat(actions, req, res));
 	app.get("/newchat", (req, res) => routes.newchat(actions, req, res));
 
 	app.listen(Constants.port, () => {
 		console.log(`Server is listening on port ${Constants.port}`);
 	});
-})();
+}
+
+
+main();
