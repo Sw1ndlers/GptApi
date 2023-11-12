@@ -1,16 +1,11 @@
-import assert from 'assert';
+import chalk from "chalk";
 
-const constants = {
-	email: process.env.EMAIL!,
-	password: process.env.PASSWORD!,
-	cookiesPath: process.env.COOKIES_PATH!,
-	clickDelay: parseInt(process.env.CLICK_DELAY!),
-    port: parseInt(process.env.PORT!),
-};
-
-// Ensure all constants are defined
-for (const [key, value] of Object.entries(constants)) {
-    assert(value, `${key} is not defined (check .env file)`);
+export const ChalkColors = {
+	Dim: chalk.hex("#848484"),
+	Blue: chalk.hex("#5fabe9"),
+	Green: chalk.hex("#5fe99e"),
+	Red: chalk.hex("#e95f5f"),
+	Pink: chalk.hex("#ee64ac"),
+	Purple: chalk.hex("#7753ca"),
+    Yellow: chalk.hex("#f6c42d"),
 }
-
-export default constants;

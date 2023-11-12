@@ -4,8 +4,10 @@ import express from "express";
 import PlaywrightHandler from "./handlers/Playwright";
 import ActionsHandler from "./handlers/Actions";
 import CookieHandler from "./handlers/Cookies";
+import Logger from "./utils/Logger";
 
-import Constants from "./utils/Constants";
+import Enviornment from "./utils/Enviornment";
+const { email, password, cookiesPath, clickDelay, port } = Enviornment;
 
 // -- Constants
 
@@ -22,19 +24,25 @@ async function startChat(
 	const cookiesExist = cookieHandler.CacheExists();
 
 	if (cookiesExist) {
+		Logger.info("Loading cookies from cache");
+
 		const cookies = await cookieHandler.GetCookies();
 		await context.addCookies(cookies);
 
 		await playWrightHandler.Goto("https://chat.openai.com/"); // Go to chat page
 	} else {
-		await actions.Login(Constants.email, Constants.password); // Login to OpenAI
+		Logger.info("Logging into OpenAI");
+		await actions.Login(email, password); // Login to OpenAI
 	}
 
 	await actions.DismissPopup();
 
 	if (!cookiesExist) {
+		Logger.info("Caching cookies");
 		cookieHandler.CacheCookies(await context.cookies()); // Cache cookies
 	}
+
+    Logger.info("Chat is ready")
 }
 
 // Login, Cache Cookies, Create Routes
@@ -42,8 +50,8 @@ async function initialize() {
 	const handler = new PlaywrightHandler();
 	await handler.Launch();
 
-	const actions = new ActionsHandler(handler, Constants.clickDelay);
-	const cookieHandler = new CookieHandler(Constants.cookiesPath);
+	const actions = new ActionsHandler(handler, clickDelay);
+	const cookieHandler = new CookieHandler(cookiesPath);
 
 	await startChat(cookieHandler, handler, actions);
 
@@ -65,10 +73,8 @@ async function main() {
 	app.get("/chat", (req, res) => routes.chat(actions, req, res));
 	app.get("/newchat", (req, res) => routes.newchat(actions, req, res));
 
-	app.listen(Constants.port, () => {
-		console.log(`Server is listening on port ${Constants.port}`);
+	app.listen(port, () => {
+		Logger.info(`Listening on port ${port}\n`);
 	});
 }
-
-
 main();
