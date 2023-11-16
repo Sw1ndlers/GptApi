@@ -1,3 +1,6 @@
+Well this was short lived, chat gpt just redid their whole ui and added some bot detection.  
+Not sure if im ever going to update this but keeping it as an archive for now  
+
 # Gpt Api
 
 A pseudo API for GPT-3 created using typescript.  
